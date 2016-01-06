@@ -1,0 +1,13 @@
+{
+	"name": "app",
+	"dependencies": {
+		"lodash": "",
+		"angular": "",
+		"angular-touch": "",
+		"angular-animate": "",
+		"angular-sanitize": "",
+		"angular-resource": "",
+		"angular-ui-router": "",
+		"animate.css": ""
+	}
+}

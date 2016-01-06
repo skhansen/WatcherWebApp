@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head lang="en">
+    <meta charset="utf-8">
+    <title>Watcher groups</title>
+    <script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="js/adminConfig.js"></script>
+	<script type="text/javascript" src="js/adminUtils.js"></script>
+</head>
+<body>
+
+    <div>
+        <button id="btnReload">Reload</button>
+        Last reloaded:&nbsp;<span id="lblLastReloaded"></span>
+    </div>
+    
+    <table id="grpTable" class="display" cellspacing="5" cellpadding="3" style="font-family:Verdana; font-size:16pt">
+        <thead>
+            <tr>
+                <th>Started</th>
+                <th>Status</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+                <tr id="row">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+        </tfoot>
+
+    </table>
+
+    
+    <script  type="text/javascript">
+
+        $(function ()
+        {
+
+            $.ajaxSetup({
+                error: function (xhr, status, error)
+                {
+                    alert("An error occured: Access denied, or " + error);
+                }
+            });
+
+            var pwd = prompt("Please, enter password:", "");
+
+            reloadData();
+
+            $("#btnReload").click(function () { reloadData(); });
+
+            function reloadData()
+            {
+                var apiUrl = String.format("{0}/admin/groups/$latest", AdminConfig.WATCHER_API);
+                $.get(apiUrl,
+					{ authToken: pwd },
+                    function (data) {
+                        $("#grpTable tbody tr").remove();
+
+                        var template = document.querySelector('#row');
+                        for (var i = 0; i < data.length; i++) {
+                            var item = data[i];
+                            var clone = template.cloneNode(true);
+                            var cells = clone.querySelectorAll('td');
+
+                            var date = new Date(item.started);
+                            cells[0].textContent = date.toLocaleString();
+
+                            var url = "<a target='_blank' href='" + String.format("{0}/#/{1}/{2}", AdminConfig.APP_URL, item.groupId, AdminConfig.BotId)  +  "'>" + item.status + "</a>";
+                            // var url = "<a target="_blank" href='http://localhost:14000/#/" + item.groupId + "/" + item.phone + "'>" + item.status + "</a>";
+                            cells[1].appendChild($(url)[0]);
+                            cells[2].textContent = item.name;
+                            cells[3].textContent = item.phone;
+                            cells[4].textContent = item.email;
+                            $("#grpTable tbody")[0].appendChild(clone);
+                        }
+
+                        $("#lblLastReloaded").text((new Date()).toString());
+                    });
+            }
+
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+	"name": "app",
+	"dependencies": {
+		"jade": "",
+		"lodash": "",
+		"express": "",
+		"babel-core": "",
+		"compression": "",
+		"run-sequence": "",
+		"browser-sync": "",
+		"coffee-script": "",
+		"gulp": "",
+		"gulp-util": "",
+		"gulp-filter": "",
+		"gulp-uglify": "",
+		"gulp-minify-css": "",
+		"gulp-load-plugins": "",
+		"webpack": "",
+		"raw-loader": "",
+		"url-loader": "",
+		"css-loader": "",
+		"file-loader": "",
+		"jade-html-loader": "",
+		"ng-cache-loader": "",
+		"json-loader": "",
+		"html-loader": "",
+		"babel-loader": "",
+		"style-loader": "",
+		"stylus-loader": "",
+		"coffee-loader": "",
+		"ng-annotate-loader": "",
+		"autoprefixer-loader": "",
+		"html-webpack-plugin": "",
+		"clean-webpack-plugin": "",
+		"extract-text-webpack-plugin": ""
+	},
+	"engines": {
+		"node": ">=0.12"
+	},
+	"scripts": {
+		"dev": "ENV=DEV gulp build:dev",
+		"prod": "ENV=PROD gulp build:full",
+		"stage": "ENV=STAGE gulp build:fast"
+	}
+}

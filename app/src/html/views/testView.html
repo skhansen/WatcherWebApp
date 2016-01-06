@@ -1,0 +1,121 @@
+<style class="ng-scope">
+    div {
+        border: 1px solid #ebebeb;
+    }
+
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .wrapper {
+        height: 100%;
+    }
+
+    @media screen and (max-width: 480px) {
+        .left-side {
+            width: 100% !important;
+            height: calc(100% - 110px) !important;
+        }
+
+        .right-side {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+
+    .header {
+        height: 50px;
+        position: absolute;
+        z-index: 1030;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: wheat;
+    }
+
+    .left-side {
+        padding: 50px 0px 0px 0px;
+        width: 70%;
+        height: 100%;
+        float: left;
+        position: relative;
+        box-sizing: border-box;
+    }
+
+    .right-side {
+        width: 30%;
+        height: 100%;
+        box-sizing: border-box;
+        position: relative;
+        float: left;
+    }
+
+    .not-expanded {
+        height: 107px !important;
+        margin: 0;
+    }
+
+    .sep {
+        clear: both;
+    }
+
+    .chat-header {
+        height: 57px;
+        z-index: 1030;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: pink;
+    }
+
+    .chat-content {
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .chat-footer {
+        height: 43px;
+        position: absolute;
+        z-index: 1030;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        background: wheat;
+    }
+
+    .h-left-side {
+        display: none
+    }
+
+    .small {
+        height: calc(100% - 250px) !important;
+    }
+
+</style>
+
+<div class="wrapper ng-scope">
+    <div class="header">
+
+    </div>
+    <div class="left-side" ng-class="isExpand ? 'h-left-side' : ''"></div>
+    <div class="right-side not-expanded" ng-class="isExpand ? '' : 'not-expanded'">
+        <div class="chat-header" ng-click="isExpand = !isExpand">
+
+        </div>
+        <div class="chat-content">
+
+        </div>
+        <div class="chat-footer">
+            <input type="text" ng-focus="isFocus = true;" ng-blur="isFocus = false;">
+        </div>
+    </div>
+</div>

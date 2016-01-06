@@ -1,0 +1,125 @@
+<div class="row placeholder" ng-show="!isShowEnd">
+    <div class="col-md-9 outer-chat-header">
+        <div outer-chat-header></div>
+    </div>
+    <div id="mapContainer" class="col-md-9 map-container">
+        <div class="progress-container" ng-click="prBarClick()">
+            <div class="c100 small" ng-class="'p' + circleProgress">
+                <span><img ng-src="{{group.user.avatar}}"></span>
+
+                <div class="slice">
+                    <div class="bar"></div>
+                    <div class="fill"></div>
+                </div>
+            </div>
+        </div>
+        <div class="emergency-wrapper" ng-show="isShowWarning && !isMobile">
+            <img class="imgX" src="img/X.png" onClick="$('#footer').hide()" ng-click="closeEmergency()">
+
+            <div class="emergency-header">Emergency</div>
+            <div class="emergency-body">{{group.user.name}} is in trouble!</div>
+        </div>
+        <div id="inf" class="inf-wrapper" ng-show="!isShowEnd && !isMobile">
+            <img class="imgX" src="img/X.png" onClick="$('#inf').hide()">
+
+            <div class="emergency-body">
+                Thanks for watching over {{group.user.name}} on his trip. <br/>
+                Go ahead and let him know you've got his back!
+            </div>
+        </div>
+        <div id="map" ng-show="group"></div>
+        <div class="map-message-container" ng-hide="group">
+            <div class="map-message"></div>
+        </div>
+
+    </div>
+    <div class="col-md-3 chat-placeholder" ng-class="$root.isHidden ? 'hidden-chat-placeholder' : ''">
+        <div id="ii" inner-chat-header class="inner-chat-header"></div>
+        <div chat class="chat"></div>
+    </div>
+</div>
+
+<div id="footer" class="navbar navbar-fixed-bottom" ng-show="!isShowEnd && isMobile">
+    <img class="imgX" src="img/X.png" onClick="$('#footer').hide()">
+
+    <div>
+        Thanks for watching over {{group.user.name}} on his trip. Go ahead and let him know you've got his back!
+    </div>
+    <img id="greyMessage" src="img/messageGrey.png" ng-click="messageClick()">
+</div>
+
+<div class="shWarning warning-wrapper scrollable" ng-show="isShowWarning && isMobile">
+    <div class="warning-wrapper">
+        <div class="cap-wrapper">
+            <div class="cap-container">
+                <img src="img/WebApp/closeBtn@3x.png" class="close-btn" onclick="$('#footer').hide()"
+                     ng-click="closeEmergency()"/>
+
+                <div class="cap-header emergencyText">
+                    Emergency
+                </div>
+                <div>
+                    <img ng-src="{{isEmpty(group.user.avatar) ? 'img/WebApp/noAvatarMale@3x.png' : group.user.avatar}}"
+                         ng-hide="group.user.gender == 1" class="person icon-container"
+                         alt="person"/>
+                    <img ng-src="{{isEmpty(group.user.avatar) ? 'img/WebApp/noAvatarFemale@3x.png' : group.user.avatar}}"
+                         ng-hide="group.user.gender != 1" class="person icon-container"
+                         alt="person"/>
+                </div>
+
+                <div class="cap-header">
+                    {{group.user.name}} is in trouble!<br/>
+                <span>
+                Please check up on {{group.user.gender == 1 ? 'him' : 'her'}} ASAP.</span>
+                </div>
+                <div class="cap-message redmap">
+                    <div id="redMap"></div>
+                </div>
+                <div class="cap-btns">
+                    <a id="a-call" href="tel:{{group.user.phoneNumber}}">
+                        <div class="whiteBorder">
+                            <img id="img-call" src="img/WebApp/call@3x.png" class="imgBtn"/> Call
+                        </div>
+                    </a>
+
+                    <div id="d-message" class="whiteBorder" ng-click="messageClick()">
+                        <img id="img-message" src="img/WebApp/messageIcon@3x.png" class="imgBtn"/> Message
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<div class="warning-wrapper ended-wrapper progress-wrapper" ng-show="isShowEnd">
+    <div class="cap-wrapper">
+        <div class="cap-container">
+            <img ng-src="{{isEmpty(group.user.avatar) ? 'img/WebApp/noAvatarMale@3x.png' : group.user.avatar}}"
+                 ng-hide="group.user.gender == 1" class="person icon-container"
+                 alt="person"/>
+            <img ng-src="{{isEmpty(group.user.avatar) ? 'img/WebApp/noAvatarFemale@3x.png' : group.user.avatar}}"
+                 ng-hide="group.user.gender != 1" class="person icon-container"
+                 alt="person"/>
+
+            <div class="cap-header">
+                {{group.user.name}} ended {{group.user.gender == 1 ? 'his' : 'her'}} trip
+            </div>
+            <div class="cap-message">
+                Thanks for helping out! <a href="http://itunes.apple.com/app/id988526045"> Get Watcher</a><br/> today to
+                start your own trip.
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="loader-wrapper" ng-show="inProgress">
+    <div class="loader">
+        <div class="cap-container loader-cont">
+            <img src="img/loader.gif" alt="loader"/>
+        </div>
+    </div>
+</div>

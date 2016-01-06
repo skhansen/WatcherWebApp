@@ -1,0 +1,37 @@
+<div class="chat-persons" ng-class="$root.statusType == 12 ? 'red' : ''">
+    <div class="divPerson both-person">
+        <span style="margin-top: 0px;"> <img src="img/WebApp/BotFace@3x.png"/> </span>
+    </div>
+    <div ng-repeat="user in group.followers" class="divPerson">
+        <img ng-show="group.user.avatar" ng-src="{{group.user.avatar}}" alt="person" class="img-div-person"/>
+        <span ng-hide="group.user.avatar">{{user.firstName[0]}}{{user.secondName[0]}} </span>
+    </div>
+</div>
+<div id="message-container" class="chat-message-container" ng-class="$root.isHidden ? 'hidden-chat' : ''">
+    <div ng-repeat-start="message in messages track by $index" on-finish-render="ngRepeatFinished" class="sender-name">
+        {{message.sender.user_id !== phoneNumber ? getUserName(message.sender.user_id) : ''}}
+    </div>
+    <div class="chat-message-wrapper">
+        <div class="icon-wrapper" ng-show="message.sender.user_id !== phoneNumber ">
+            <div class="divPerson chatPerson green" ng-show="message.sender.initials && getAvatar(message.sender) == ''">
+                <span>{{getUserName(message.sender.user_id)}}</span>
+            </div>
+            <div class="divPerson chatPerson" ng-show="getAvatar(message.sender) != ''">
+                <img ng-src="{{getAvatar(message.sender)}}"/>
+            </div>
+        </div>
+        <div class="chat-message"
+             ng-class=" message.sender.user_id !== phoneNumber ? 'right ' + getColorMessage(message) : ''">
+            <div ng-bind="prepareMessage(message)"></div>
+        </div>
+    </div>
+    <div ng-repeat-end class="message-status"
+         ng-class="message.sender.user_id !== phoneNumber ? '' : 'right-message'"
+         ng-bind="message.sender.user_id !== phoneNumber ? getSeenBy(message.recipient_status) : 'Delivered'"></div>
+</div>
+<div id="chatFooter" class="chat-footer">
+    <input id="chatTextBox" type="text" ng-model="message" ng-enter="sendMessage()" ng-focus="focusInputTextBox()" placeholder="Message"
+           />
+    <input type="button" ng-click="sendMessage()" value="Send" ng-disabled="message == ''"
+           ng-class="message == '' ? 'disabled sendButton' :$root.statusType == 12 ? 'sendButtonRed sendButton' : 'sendButton' ">
+</div>

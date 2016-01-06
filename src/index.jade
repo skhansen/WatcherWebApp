@@ -1,0 +1,19 @@
+html(
+	lang=""
+	ng-app="app"
+	ng-controller="app.ctrl as app"
+	)
+
+	head
+		title Selectel
+		meta(charset="UTF-8")
+		meta(http-equiv="x-ua-compatible" content="ie=edge")
+		meta(name="viewport" content="width=device-width, initial-scale=1")
+
+	body.l-root
+		.l-head(ui-view="head")
+		.l-body(ui-view="body")
+		.l-foot(ui-view="foot")
+
+		pre(style="display:none;").
+			!{JSON.stringify(ENV, 4, 4)}

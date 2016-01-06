@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users Administration</title>
+	<script type="text/javascript" src="js/jquery-1.7.min.js"></script>
+	<script type="text/javascript" src="js/adminConfig.js"></script>
+	<script type="text/javascript" src="js/adminUtils.js"></script>
+</head>
+<body>
+
+	<div>
+		<label for="inpPhoneNumber">Search user  to delete by phone number:&nbsp;</label>
+		<b>+</b>&nbsp;<input id="inpPhoneNumber" type="text">
+		<button id="btnSearch">Find</button>
+		<button id="btnDelete">Delete</button>
+	</div>
+	<div>
+		<div>User ID:&nbsp;<span id="userId">[Undefined]</span> </div>
+
+		<div> <b>Groups</b>&nbsp;(<span id="groupsCount">0</span>):</div>
+		<div style="margin-left: 30px">
+			<ul id="groupsList"></ul>
+		</div>
+
+		<div><b>Followers</b>&nbsp;(<span id="followersCount">0</span>):</div>
+		<div style="margin-left: 30px">
+			<ul id="followersList"></ul>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	$(function()
+	{
+		var pwd = prompt("Please, enter password:", "");
+
+		function  searchUserByPhone(phone)
+		{
+			var apiUrl = String.format("{0}/admin/users({1})/$ptc-info", AdminConfig.WATCHER_API, phone);
+			$.get(apiUrl,
+				{ authToken: pwd })
+				.done(function(data)
+				{
+					setUserInfo(data);
+				})
+				.fail(function(){ clearUserInfo(); });
+		}
+
+		function  deleteUserByPhoneNumber(phone)
+		{
+			var apiUrl = String.format("{0}/admin/users({1})?authToken={2}", AdminConfig.WATCHER_API, phone, pwd);
+			$.ajax(apiUrl,
+				{
+					type: "DELETE"
+				})
+				.done(function(data) {
+					if (data && data.result == 1)
+					{
+						alert("Deleted successfully!");
+						clearUserInfo();
+					}
+					else if(data && data.result == 0)
+						alert("User not found!");
+				})
+				.fail(function(){ alert("Error!");  });
+		}
+
+		// display user info
+//		var data = new
+//		{
+//			userId
+//			followersIdList
+//			followersCount
+//			groupsIdList
+//			groupsCount
+//		};
+		function setUserInfo(data)
+		{
+			$("#userId").text(data && data.userId ? data.userId : "[undefined]");
+			$("#groupsCount").text(data ? data.groupsCount : "0");
+			$("#followersCount").text(data ? data.followersCount : "0");
+
+			if(data && data.groupsCount > 0)
+				populateList($("#groupsList"), data.groupsIdList.split(','));
+			else
+				clearList($("#groupsList"));
+
+			if(data && data.followersCount > 0)
+				populateList($("#followersList"), data.followersIdList.split(','));
+			else
+				clearList($("#followersList"));
+		}
+
+		function populateList(list, itemsArray)
+		{
+			clearList(list);
+
+			$.each(itemsArray, function( key, val )
+			{
+				list.append( "<li id='" + key + "'>" + val + "</li>" );
+			});
+		}
+
+		function  clearList(list)
+		{
+			list.empty();
+		}
+
+		function clearUserInfo()
+		{
+			setUserInfo(null);
+		}
+
+		$("#btnSearch").click(function()
+		{
+			searchUserByPhone($("#inpPhoneNumber").val());
+		});
+
+		$("#btnDelete").click(function()
+		{
+			var phone = $("#inpPhoneNumber").val();
+			if(!phone)
+				alert("User is undefined!");
+
+			deleteUserByPhoneNumber(phone);
+		});
+
+
+	});
+</script>
+
+</body>
+</html>
