@@ -152,7 +152,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             var tmpCtx = second.getContext('2d');
 
             var thumbImg = new Image();
-            thumbImg.src = 'data:image/gif;base64,' + response.data;
+            thumbImg.src = 'data:image/jpeg;base64,' + response.data;
             thumbImg.onload = function () {
                 tmpCtx.save();
                 tmpCtx.beginPath();
@@ -250,7 +250,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             $scope.finishMarker.setIcon('img/WebApp/destinationMarkerPanic.png');
             if ($scope.group.user.hasOwnProperty('avatar') && $scope.group.user.avatar != '' && $scope.currentIconBasePanic == '') {
                 prepareIcon($scope.group.user.avatar, $scope.currentIcon, function (base64) {
-                    debugger;
+                    //debugger;
                     if(!base64){
                         init();
                         return;
@@ -326,11 +326,11 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
         if ($scope.group.statusType != 12 && $scope.statusType == 12) {
             $scope.isShowWarning = false;
         }
-        debugger;
+        //debugger;
         if ($scope.group.statusType == 12 && $scope.statusType != $scope.group.statusType) {
             if ($scope.group.user.hasOwnProperty('avatar') && $scope.group.user.avatar != '' && $scope.currentIconBasePanic == '') {
                 prepareIcon($scope.group.user.avatar, $scope.currentIcon, function (base64) {
-                    debugger;
+                    //debugger;
                     if(!base64){
                         init();
                         return;
@@ -416,9 +416,9 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
     };
 
     $scope.messageClick = function () {
-        $('#footer').hide()
+        //$('#footer').hide()
         $scope.closeEmergency();
-        $rootScope.showChat(true);
+        //$rootScope.showChat(true);
     };
     var directionsService = new google.maps.DirectionsService(),
         directionDisplay = new google.maps.DirectionsRenderer();
@@ -436,7 +436,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             origin: new google.maps.LatLng($scope.group.origin.latitude, $scope.group.origin.longitude),
             destination: new google.maps.LatLng($scope.group.currentPosition.latitude, $scope.group.currentPosition.longitude),
             travelMode: google.maps.DirectionsTravelMode.WALKING
-        };
+        };        
         directionsService.route(request, function (response, status) {
             if (status == google.maps.DirectionsStatus.OK) {
                 callback(getDistance(response));
@@ -473,15 +473,18 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             getRemainDistance(function (remain) {
                 remainDistance = remain;
                 if (wentDistance + remainDistance === 0) {
-                    $scope.circleProgress = 0;
+                  $scope.circleProgress = 0;
+                  $rootScope.circleProgress = $scope.circleProgress;
                     return;
                 }
                 var progress = parseInt(((wentDistance / (wentDistance + remainDistance)) * 100).toFixed(0));
                 if (progress > 99) {
-                    $scope.circleProgress = '100';
+                  $scope.circleProgress = '100';
+                  $rootScope.circleProgress = $scope.circleProgress;
                     return;
                 }
                 $scope.circleProgress = progress;
+                $rootScope.circleProgress = $scope.circleProgress;
             });
         });
     }
@@ -489,7 +492,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
     $interval(getProgress, 10000);
     getProgress();
 
-    function showChat() {
+    /*function showChat() {
         $scope.chatIsShow = true;
         $("header").hide();
         $("#mapContainer").hide('slow');
@@ -499,7 +502,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
         $rootScope.isHidden = false;
         $('message-container').scrollTop = 999999999;
 
-    }
+    }*/
 
     $scope.currentIcon = 'img/WebApp/currentPositionMarkerDefault.png';
     $scope.currentIconBase = '';
@@ -508,11 +511,11 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             method: 'GET',
             url: Config.WATCHER_API + groupId,
             async: true
-        }).then(function successCallback(response) {
-
+        }).then(function successCallback(response) {          
             GroupService.setGroup(response.data);
 
             $scope.group = response.data;
+            $rootScope.group = response.data;
             if (!$scope.group) {
                 console.log('Group is null!');
                 return;
@@ -526,7 +529,7 @@ controllers.controller('watcherController', function ($scope, $http, GroupServic
             }
 
             prepareIcon($scope.group.user.avatar, $scope.currentIcon, function (base64) {
-                debugger;
+                //debugger;
                 if(!base64){
                     init();
                     return;

@@ -1,36 +1,15 @@
-<div id="chatHeader" class="navbar navbar-bottom outer-header" ng-class="$root.statusType == 12 ? 'dark-red' : ''">
-
-
-    <div class="person-name" ng-class="$root.statusType == 12 ? 'dark-white' : ''">
-        <div>{{group.user.name}}</div>
-        <div ng-hide="group.estimatedTimeArrival == null || group.statusType == 13" ng-class="$root.statusType == 12 ? 'dark-white' : ''">
-            <div ng-hide="$root.statusType == 12">
-                <img src="img/walkingMan.png" class="transportImg" ng-hide="group.transportationMethod != 1">
-                <img src="img/Images.xcassets/cycleIcon.imageset/cycleIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 2">
-                <img src="img/Images.xcassets/carIcon.imageset/carIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 3">
-                <img src="img/Images.xcassets/busIcon.imageset/busIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 4">
-            <span> {{GetTime()}}</span>
-        </div></div>
-        <div ng-hide="$root.statusType != 12">
-            Emergency
-            </div>
-        <div ng-hide="group.statusType != 13" ng-class="$root.statusType == 12 ? 'dark-white' : ''">
-
-                    <span ng-hide="$root.isTimeRun" ng-class="$root.statusType == 12 ? 'dark-white' : ''">
-                    </span>
-            <span ng-show="$root.isTimeRun" ng-class="$root.statusType == 12 ? 'dark-white' : ''">
-                Chat ends in {{ $root.min }}:{{ $root.sec }}
-            </span>
-        </div>
-    </div>
-
-
-    <a href="tel:{{group.user.phoneNumber}}"><img id="btnCall" class="" src="img/call2x.png"></a>
-    <div class="set-icon-wrapper">
-        <img id="settingBtnDesctop" ng-src="{{$root.statusType != 12 ? 'img/WebApp/setting.png' : 'img/WebApp/setting_white.png' }}" alt="" ng-click="showHideSetting()"/>
-        <div class="set-icon-container" ng-show="settingIsShow">
-            <div class="set-leave">Leave Trip</div>
-            <div class="set-cancel">Cancel</div>
-        </div>
-    </div>
+<div id="chatHeader" class="navbar navbar-bottom outer-header" ng-class="$root.statusType == 12 ? 'emergency' : ''">
+  <div class="person-name selected" onclick="$('.map-container').removeClass('selected'); $(this).addClass('selected'); $('.inner-chat-header').removeClass('selected')">
+      <div>{{group.user.name}}</div>      
+  </div>
+  <div inner-chat-header class="inner-chat-header" onclick="$('.map-container').addClass('selected'); $(this).addClass('selected'); $('.person-name').removeClass('selected');"></div>
+  <div class="set-icon-wrapper">
+      <!--<img id="settingBtnDesctop" ng-src="{{$root.statusType != 12 ? 'img/WebApp/setting.png' : 'img/WebApp/setting_white.png' }}" alt="" ng-click="showHideSetting()"/>-->
+      <button ng-click="showHideSetting()">...</button>
+      <div class="set-icon-container" ng-show="settingIsShow">
+          <!--<div class="set-leave">Leave Trip</div>-->
+          <div class="set-call"><a href="tel:{{group.user.phoneNumber}}">Call</a></div>
+          <div class="set-cancel" ng-click="showHideSetting()">Cancel</div>
+      </div>
+  </div>
 </div>

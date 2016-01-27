@@ -15,19 +15,19 @@ chatModule.controller('chatController', ['$scope', 'CS', function ($scope, CS) {
     };
 
     $scope.showChat = function () {
-        $("#map").hide('slow');
+        //$("#map").hide('slow');
         //$("#header").hide('slow');
-        $("#showChat").hide('slow');
-        $("#hideChat").show('slow');
-        $("#chatHeader").removeClass("navbar-bottom");
+        //$("#showChat").hide('slow');
+        //$("#hideChat").show('slow');
+        //$("#chatHeader").removeClass("navbar-bottom");
     };
 
     $scope.hideChat = function () {
-        $("#map").show('slow');
-        $("#header").show('slow');
-        $("#showChat").show('slow');
-        $("#hideChat").hide('slow');
-        $("#chatHeader").addClass("navbar-bottom");
+        //$("#map").show('slow');
+        //$("#header").show('slow');
+        //$("#showChat").show('slow');
+        //$("#hideChat").hide('slow');
+        //$("#chatHeader").addClass("navbar-bottom");
     };
 
     function init() {

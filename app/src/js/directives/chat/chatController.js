@@ -163,12 +163,12 @@ chatModule.controller('chatController', function ($scope, GroupService, $interva
     };
 
     $scope.focusInputTextBox = function () {
-        var width = $(window).width();
+        /*var width = $(window).width();
         if (width < 993) {
             if ($rootScope.isHidden) {
                 $rootScope.showChat();
             }
-        }
+        }*/
     };
 
     function preparedInitials() {
@@ -214,6 +214,10 @@ chatModule.controller('chatController', function ($scope, GroupService, $interva
     function getUserName(number) {
         if(number === 'CPH_WATCHER_BOT_IDENTIFIER'){
             return 'Watcher';
+        }
+        if (!$scope.group.followers) {
+          $scope.userName = '';
+          return;
         }
         var filter = $scope.group.followers.filter(function (item) {
             return item.phoneNumber === number;

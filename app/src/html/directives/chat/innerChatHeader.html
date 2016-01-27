@@ -1,25 +1,22 @@
-<div id="chatHeader" class="navbar navbar-bottom" ng-class="$root.statusType == 12 ? 'dark-red' : ''">
-
-
-    <div class="person-name" ng-class="$root.statusType == 12 ? 'dark-white' : ''" ng-click="showChat()">
-        <div class="dvusername">{{group.user.name}}</div>
+<div id="chatHeader" ng-class="$root.statusType == 12 ? 'emergency' : ''">
+    <div>
         <div ng-hide="group.estimatedTimeArrival == null || $root.statusType == 12" >
             <img src="img/walkingMan.png" class="transportImg" ng-hide="group.transportationMethod != 1">
             <img src="img/Images.xcassets/cycleIcon.imageset/cycleIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 2">
             <img src="img/Images.xcassets/carIcon.imageset/carIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 3">
             <img src="img/Images.xcassets/busIcon.imageset/busIcon@3x.png" class="transportImg" ng-hide="group.transportationMethod != 4">
             <span ng-hide="$root.isTimeRun" ng-class="$root.statusType == 13? 'dark-white' : ''"> {{GetTime()}}</span>
-            <span ng-show="$root.isTimeRun" ng-class="$root.statusType == 13 ? 'dark-white' : ''">
+            <!--<span ng-show="$root.isTimeRun" ng-class="$root.statusType == 13 ? 'dark-white' : ''">
               Chat ends in {{ $root.min }}:{{ $root.sec }}
-            </span>
+            </span>-->
         </div>
-        <div ng-hide="$root.statusType != 12">
+        <!--<div ng-hide="$root.statusType != 12">
             Emergency
-        </div>
+        </div>-->
     </div>
 
-    <img id="showChat" class="imgArrow" ng-src="{{$root.statusType != 12 ? 'img/arrow_up.png' : 'img/WebApp/arrowTop_White@3x.png' }}" ng-click="showChat()">
-    <img id="hideChat" style="display: none;" class="imgArrow"  ng-src=" {{$root.statusType != 12 ? 'img/arrow_down.png' : 'img/WebApp/arrowBottom_White@3x.png' }}"
+    <!--<img id="showChat" class="imgArrow" ng-src="{{$root.statusType != 12 ? 'img/arrow_up.png' : 'img/WebApp/arrowTop_White@3x.png' }}" ng-click="showChat()">
+    <img id="hideChat" style="display: none;" class="imgArrow"  ng-src="{{$root.statusType != 12 ? 'img/arrow_down.png' : 'img/WebApp/arrowBottom_White@3x.png' }}"
          ng-click="hideChat()">
     <a href="tel:{{group.user.phoneNumber}}"><img id="btnCall" class="" src="img/call2x.png"></a>
     <div class="set-icon-wrapper">
@@ -32,5 +29,5 @@
             <div class="set-leave">Leave Trip</div>
             <div class="set-cancel">Cancel</div>
         </div>
-    </div>
+    </div>-->
 </div>

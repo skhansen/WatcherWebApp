@@ -1,13 +1,5 @@
-<div class="chat-persons" ng-class="$root.statusType == 12 ? 'red' : ''">
-    <div class="divPerson both-person">
-        <span style="margin-top: 0px;"> <img src="img/WebApp/BotFace@3x.png"/> </span>
-    </div>
-    <div ng-repeat="user in group.followers" class="divPerson">
-        <img ng-show="group.user.avatar" ng-src="{{group.user.avatar}}" alt="person" class="img-div-person"/>
-        <span ng-hide="group.user.avatar">{{user.firstName[0]}}{{user.secondName[0]}} </span>
-    </div>
-</div>
-<div id="message-container" class="chat-message-container" ng-class="$root.isHidden ? 'hidden-chat' : ''">
+
+<div id="message-container" class="chat-message-container"> <!--ng-class="$root.isHidden ? 'hidden-chat' : ''"-->
     <div ng-repeat-start="message in messages track by $index" on-finish-render="ngRepeatFinished" class="sender-name">
         {{message.sender.user_id !== phoneNumber ? getUserName(message.sender.user_id) : ''}}
     </div>

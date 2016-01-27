@@ -13,10 +13,11 @@ chatModule.controller('chatHeaderController', function ($scope, CS, GroupService
             setTimeout(init, 1000);
             return;
         }
-        $scope.group = GroupService.getGroup();
+        $scope.group = GroupService.getGroup();        
+        $rootScope.group = $scope.group;
     }
 
-    $rootScope.showChat = $scope.showChat = function (isFocusTxt) {
+    /*$rootScope.showChat = $scope.showChat = function (isFocusTxt) {
         if ($scope.chatIsShow === true) {
             $scope.hideChat();
             return;
@@ -42,7 +43,7 @@ chatModule.controller('chatHeaderController', function ($scope, CS, GroupService
         $('#map').addClass('full-height');
         $rootScope.isHidden = false;
 
-    };
+    };*/
 
     $scope.hideChat = function () {
         $scope.chatIsShow = false;
@@ -68,6 +69,7 @@ chatModule.controller('chatHeaderController', function ($scope, CS, GroupService
     }
         return timeString;
     };
+    $rootScope = $scope.GetTime;
 
     $scope.showHideSetting = function () {
         if($scope.settingIsShow === true){

@@ -8,10 +8,10 @@ var Config = {
 
 
     //Dev
-    /*
-     WATCHER_API: 'http://watcherapidev.azure-mobile.net/tables/Group/',
-     APP_ID: 'b98954f8-e46d-11e4-9a8b-ce6c8b00628c',
-     IDENTITY_TOKEN_URL: "http://watcherapidev.azure-mobile.net/api/LayerNet/GetIdentityToken",
-     WATCHER_API_AVATAR: 'http://watcherapidev.azure-mobile.net/tables/User/Base64Image?urlId='
-     */
+    
+    //WATCHER_API: 'http://localhost:32449/tables/Group/',
+    // APP_ID: 'b98954f8-e46d-11e4-9a8b-ce6c8b00628c',
+    // IDENTITY_TOKEN_URL: "http://localhost:32449/api/LayerNet/GetIdentityToken",
+    // WATCHER_API_AVATAR: 'http://localhost:32449/tables/User/Base64Image?urlId='
+     
 };

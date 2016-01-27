@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html ng-app="watcher">
 <head lang="en">
     <meta charset="UTF-8">
@@ -30,13 +30,27 @@
 
 </head>
 <body>
-<div id="header"  class="navbar navbar-fixed-top">
-    <img class="logo" src="img/WebApp/WebAppTitle@3x.png">
-    <a target="_blank" href="http://itunes.apple.com/app/id988526045">    <img class="banner" src="img/WebApp/AppStore@3x.png" ></a>
+<div id="header" class="navbar navbar-fixed-top">
+    <div class="chat-persons" ng-class="$root.statusType == 12 ? 'emergency' : ''">                  
+      <div class="divPerson c100" ng-class="'p' + circleProgress">
+        <img ng-show="group.user.avatar" ng-src="{{group.user.avatar}}" alt="person" class="img-div-person">
+        <div class="slice">
+          <div class="bar"></div>
+          <div class="fill"></div>
+        </div>
+      </div>
+      <!--<span>{{group.user.firstName[0]}}{{group.user.secondName[0]}}</span>-->
+      <!--<div ng-repeat="user in $root.group.followers" class="divPerson">        
+        <img ng-show="group.user.avatar" ng-src="{{group.user.avatar}}" alt="person" class="img-div-person" />
+        <span ng-hide="group.user.avatar">{{user.firstName[0]}}{{user.secondName[0]}} </span>
+      </div>
+      <div class="divPerson both-person">
+        <span style="margin-top: 0px;"><img src="img/WebApp/BotFace@3x.png" /></span>
+      </div>-->
+    </div>
+    <!--<img class="logo" src="img/WebApp/WebAppTitle@3x.png">-->
+    <a target="_blank" href="http://itunes.apple.com/app/id988526045"><img class="banner" src="img/WebApp/AppStore@3x.png" ></a>
 </div>
-<div id="view" ng-view ng-class="$rootScope.isHidden ? 'a' :'b'">
-
-</div>
-
+<div id="view" ng-view ng-class="$rootScope.isHidden ? 'a' :'b'"></div>
 </body>
 </html>
